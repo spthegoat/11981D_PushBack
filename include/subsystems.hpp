@@ -11,4 +11,5 @@ pros::Motor front_intake(1);
 pros::Motor back_intake(2);
 pros::Motor top_intake(3);
 
+inline ez::Piston piston1('A');
 // inline pros::adi::DigitalIn limit_switch('A');

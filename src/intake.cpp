@@ -5,6 +5,7 @@ void intake(){
     front_intake.move(127);
     back_intake.move(0);
     top_intake.move(-127);
+    piston1.move_out();
 }
 
 void outtake(){
@@ -18,5 +19,9 @@ void stop(){
 }
 
 void high_goal(){
+    front_intake.move(127);
+    back_intake.move(0);
+    top_intake.move(127);
+    piston1.move_out();
 
 }
