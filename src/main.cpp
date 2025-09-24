@@ -273,7 +273,7 @@ void opcontrol() {
   } else if (master.get_digital(DIGITAL_R1)) {
     // High goal
     front_intake.move(127);
-    back_intake.move(127);
+    back_intake.move(0);
     top_intake.move(127);
     piston1.set(true); // Extend piston for high goal
     } else if (master.get_digital(DIGITAL_R2)) {
@@ -282,7 +282,7 @@ void opcontrol() {
     back_intake.move(127);
     top_intake.move(127);
     piston1.set(false); // Extend piston for high goal
-    } else if (master.get_digital(DIGITAL_R2)) {
+    } else if (master.get_digital(DIGITAL_DOWN)) {
     // High goal
     front_intake.move(127);
     back_intake.move(-127);
