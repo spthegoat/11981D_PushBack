@@ -1,5 +1,4 @@
 #include "main.h"
-#include "intake.cpp"
 
 /////
 // For installation, upgrading, documentations, and tutorials, check out our website!
@@ -258,14 +257,38 @@ void opcontrol() {
     // Put more user control code here!
     // . . .
 
-    if (master.get_digital(DIGITAL_R2))
-      intake();
-    else
-      stop();
-
-    if (master.get_digital(DIGITAL_L1))
-      
-
+  // Intake controls
+  if (master.get_digital(DIGITAL_L1)) {
+    // Run intake
+    front_intake.move(127);
+    back_intake.move(127);
+    top_intake.move(-127);
+    piston1.set(true); // Extend piston for intake
+  } else if (master.get_digital(DIGITAL_L2)) {
+    // Run outtake
+    front_intake.move(-127);
+    back_intake.move(127);
+    top_intake.move(0);
+    piston1.set(false); // Retract piston for outtake
+  } else if (master.get_digital(DIGITAL_R1)) {
+    // High goal
+    front_intake.move(127);
+    back_intake.move(127);
+    top_intake.move(127);
+    piston1.set(true); // Extend piston for high goal
+    } else if (master.get_digital(DIGITAL_R2)) {
+    // High goal
+    front_intake.move(127);
+    back_intake.move(127);
+    top_intake.move(127);
+    piston1.set(false); // Extend piston for high goal
+  } else {
+    // Stop intake
+    front_intake.move(0);
+    back_intake.move(0);
+    top_intake.move(0);
+    piston1.set(false); // Retract piston when stopped
+  }
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
