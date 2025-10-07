@@ -1,5 +1,6 @@
 #pragma once
 
+void middle_goal();
 void default_constants();
 
 void drive_example();

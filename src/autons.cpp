@@ -48,6 +48,27 @@ void default_constants() {
   chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there
 }
 
+
+void middle_goal() {
+  // Drive to middle goal
+  chassis.pid_odom_set({{0_in, 36_in}, fwd, 110}, true);
+    front_intake.move(127);
+    back_intake.move(127);
+    top_intake.move(-127);
+    piston1.set(true);
+  chassis.pid_wait();
+  pros::delay(3000);
+  front_intake.move(0);
+    back_intake.move(0);
+    top_intake.move(0);
+    piston1.set(false);
+
+  // Back away from middle goal
+  chassis.pid_odom_set({{0, 24, 270}, rev, 90});
+  chassis.pid_wait();
+
+  
+}
 ///
 // Drive Example
 ///
