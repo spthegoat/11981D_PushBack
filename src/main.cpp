@@ -240,10 +240,16 @@ void ez_template_extras() {
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
+
+// Intake function
+
+
 void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
-
+ if (master.get_digital_new_press(DIGITAL_UP)) {
+    autonomous();
+  }
   while (true) {
     // Gives you some extras to make EZ-Template ezier
     ez_template_extras();
@@ -260,29 +266,27 @@ void opcontrol() {
 
   // Intake controls
   if (master.get_digital(DIGITAL_L1)) {
-    // Run intake
     front_intake.move(127);
     back_intake.move(127);
     top_intake.move(-127);
     piston1.set(true); // Extend piston for intake
   } else if (master.get_digital(DIGITAL_L2)) {
-    // Run outtake
     front_intake.move(-127);
     back_intake.move(127);
     top_intake.move(0);
     piston1.set(false); // Retract piston for outtake
   } else if (master.get_digital(DIGITAL_R1)) {
-    // High goal
+       // High goal
     front_intake.move(127);
     back_intake.move(0);
     top_intake.move(127);
     piston1.set(true); // Extend piston for high goal
     } else if (master.get_digital(DIGITAL_R2)) {
-    // High goal
+    // Middle goal
     front_intake.move(127);
     back_intake.move(127);
     top_intake.move(127);
-    piston1.set(false); // Extend piston for high goal
+    piston1.set(false); // Retract piston for middle goal
     } else if (master.get_digital(DIGITAL_DOWN)) {
     // High goal
     front_intake.move(127);

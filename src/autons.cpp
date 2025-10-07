@@ -10,9 +10,9 @@ const int DRIVE_SPEED = 110;
 const int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
 
-///
-// Constants
-///
+// Add auton selector shortcut: when 'Y' and right arrow are pressed, run the selected auton
+
+// Constantsauton_
 void default_constants() {
   // P, I, D, and Start I
   chassis.pid_drive_constants_set(20.0, 0.0, 100.0);         // Fwd/rev constants, used for odom and non odom motions
@@ -51,7 +51,7 @@ void default_constants() {
 
 void middle_goal() {
   // Drive to middle goal
-  chassis.pid_odom_set({{0_in, 36_in}, fwd, 110}, true);
+  chassis.pid_odom_set({{24_in, 24_in}, fwd, 110}, true);
     front_intake.move(127);
     back_intake.move(127);
     top_intake.move(-127);
