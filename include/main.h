@@ -76,6 +76,11 @@ void initialize(void);
 void disabled(void);
 void competition_initialize(void);
 void opcontrol(void);
+void low_goal(void);
+void middle_goal(void);
+void high_goal(void);
+void basket(void);
+void stop(void);
 #ifdef __cplusplus
 }
 #endif

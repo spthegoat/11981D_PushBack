@@ -12,7 +12,7 @@ ez::Drive chassis(
     {18, -17, 16},  // Right Chassis Ports (negative port will reverse it!)
 
     10,      // IMU Port
-    2.5,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
+    2.75,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     600);   // Wheel RPM = cartridge * (motor gear / wheel gear)
 
 // Uncomment the trackers you're using here!
@@ -20,8 +20,8 @@ ez::Drive chassis(
 //  - you should get positive values on the encoders going FORWARD and RIGHT
 // - `2.75` is the wheel diameter
 // - `4.0` is the distance from the center of the wheel to the center of the robot
-// ez::tracking_wheel horiz_tracker(8, 2.75, 4.0);  // This tracking wheel is perpendicular to the drive wheels
-ez::tracking_wheel vert_tracker(4, 2, 4.0);   // This tracking wheel is parallel to the drive wheels
+// ez::tracking_wheel horiz_tracker(8, 2, 4.0);  // This tracking wheel is perpendicular to the drive wheels
+ez::tracking_wheel vert_tracker(4, 2, 0);   // This tracking wheel is parallel to the drive wheels
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -58,7 +58,7 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
-      {"Score in Middle Goal", middle_goal},
+      {"Score in Middle Goal from Right", middle_goal_right},
       //{"Drive\n\nDrive forward and come back", drive_example},
       //{"Turn\n\nTurn 3 times.", turn_example},
       //{"Drive and Turn\n\nDrive forward, turn, come back", drive_and_turn},
@@ -267,42 +267,86 @@ void opcontrol() {
   // Intake controls
   if (master.get_digital(DIGITAL_L1)) {
     // middle goal
-    front_intake.move(127);
-    back_intake.move(127);
-    top_intake.move(-127);
-    piston1.set(false); // Extend piston for intake
+    piston1.set(false); 
+    front_intake.move(100);
+    back_intake.move(100);
+    top_intake.move(-100);
   } else if (master.get_digital(DIGITAL_L2)) {
     // outtake
-    front_intake.move(-127);
-    back_intake.move(127);
+    piston1.set(false);
+    front_intake.move(-70);
+    back_intake.move(70);
     top_intake.move(0);
-    piston1.set(false); // Retract piston for outtake
+ // Retract piston for outtake
   } else if (master.get_digital(DIGITAL_R1)) {
        // High goal
+    piston1.set(true);
+    front_intake.move(127);
+    back_intake.move(127);
+    top_intake.move(127);
+ // Extend piston for high goal
+    } else if (master.get_digital(DIGITAL_R2)) {
+    // Basket
+    piston1.set(false);
     front_intake.move(127);
     back_intake.move(0);
     top_intake.move(127);
-    piston1.set(true); // Extend piston for high goal
-    } else if (master.get_digital(DIGITAL_R2)) {
-    // Middle goal
-    front_intake.move(127);
-    back_intake.move(127);
-    top_intake.move(127);
-    piston1.set(false); // Retract piston for middle goal
+ // Retract piston 
     } else if (master.get_digital(DIGITAL_DOWN)) {
     // High goal
+    piston1.set(false); 
     front_intake.move(127);
     back_intake.move(-127);
     top_intake.move(-127);
-    piston1.set(false); 
-  } else {
+    } else {
     // Stop intake
+    piston1.set(false);
     front_intake.move(0);
     back_intake.move(0);
     top_intake.move(0);
-    piston1.set(false); // Retract piston when stopped
+   // Retract piston when stopped
   }
-
+ // Toggle scraper with A button
+  static bool scraperState = false;
+  if (master.get_digital_new_press(DIGITAL_A)) {
+  scraperState = !scraperState;
+  scraper.set(scraperState);
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
+}} // <-- Add this closing brace to end opcontrol()
+
+void middle_goal() {
+  piston1.set(false);
+  front_intake.move(100);
+  back_intake.move(100);
+  top_intake.move(-100);
+}
+
+void low_goal() {
+ piston1.set(false);
+ front_intake.move(-70);
+ back_intake.move(70);
+ top_intake.move(0);
+}
+
+void high_goal() {
+  piston1.set(true);
+  front_intake.move(127);
+  back_intake.move(0);
+  top_intake.move(127);  
+}
+
+void basket() {
+  piston1.set(false);
+  front_intake.move(127);
+  back_intake.move(0);
+  top_intake.move(127);
+}
+
+void stop() {
+  piston1.set(false);
+  front_intake.move(0);
+  back_intake.move(0);
+  top_intake.move(0);
+ // Retract piston when stopped
 }
