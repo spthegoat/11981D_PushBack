@@ -266,11 +266,13 @@ void opcontrol() {
 
   // Intake controls
   if (master.get_digital(DIGITAL_L1)) {
+    // middle goal
     front_intake.move(127);
     back_intake.move(127);
     top_intake.move(-127);
-    piston1.set(true); // Extend piston for intake
+    piston1.set(false); // Extend piston for intake
   } else if (master.get_digital(DIGITAL_L2)) {
+    // outtake
     front_intake.move(-127);
     back_intake.move(127);
     top_intake.move(0);

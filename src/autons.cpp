@@ -50,24 +50,12 @@ void default_constants() {
 
 
 void middle_goal() {
-  // Drive to middle goal
-  chassis.pid_odom_set({{24_in, 24_in}, fwd, 110}, true);
-    front_intake.move(127);
-    back_intake.move(127);
-    top_intake.move(-127);
-    piston1.set(true);
+  // Drive to middle goal 
+  chassis.pid_odom_set({{0_in, 4_in}, fwd, 110}, true);
   chassis.pid_wait();
-  pros::delay(3000);
-  front_intake.move(0);
-    back_intake.move(0);
-    top_intake.move(0);
-    piston1.set(false);
+  chassis.pid_turn_set(40_deg, 70);
 
-  // Back away from middle goal
-  chassis.pid_odom_set({{0, 24, 270}, rev, 90});
   chassis.pid_wait();
-
-  
 }
 ///
 // Drive Example
