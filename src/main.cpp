@@ -285,6 +285,10 @@ void opcontrol() {
     back_intake.move(127);
     top_intake.move(127);
  // Extend piston for high goal
+  } else if (master.get_digital(DIGITAL_RIGHT)) {
+    // Auto 180 turn
+    chassis.pid_turn_set(180_deg, 110); // Turns the robot 180 degrees
+    pros::delay(500); // Optional: short delay to prevent repeated turns if button is held
     } else if (master.get_digital(DIGITAL_R2)) {
     // Basket
     piston1.set(false);

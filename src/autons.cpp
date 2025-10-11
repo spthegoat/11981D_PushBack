@@ -58,15 +58,18 @@ void middle_goal_right() {
   chassis.pid_wait();
   chassis.pid_odom_set({{15_in, 25_in}, fwd, 40}, true);
   chassis.pid_wait();
-  pros :: delay(1000);
-  // chassis.pid_turn_set(-45_deg, 70);
-  // chassis.pid_wait();
+  pros::delay(1000);
   chassis.pid_odom_set({{8.5_in, 33_in, -50_deg}, fwd, 70}, true);
   chassis.pid_wait();
   low_goal();
   pros::delay(2000);
-  chassis.pid_odom_set({{42.5_in, 10_in, 170_deg}, rev, 110}, true);
+  chassis.pid_odom_set({{42.5_in, 10_in, 180_deg}, rev, 110}, true);
   chassis.pid_wait(); // Ensure the drive command completes before ending the function
+  scraper.set(true); // Deploy scraper
+  basket();
+  pros::delay(2000);
+  chassis.pid_odom_set({{42.5_in, 15_in, 180_deg}, fwd, 50}, true);
+  chassis.pid_wait();
 }
 ///
 // Drive Example
