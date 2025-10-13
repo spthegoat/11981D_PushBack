@@ -49,31 +49,64 @@ void default_constants() {
 }
 
 
-void low_goal() {
+void low_goal_auto() {
   // Drive to middle goal 
   basket();
   chassis.pid_odom_set({{0_in, 4_in}, fwd, 110}, true);
   chassis.pid_wait();
-  chassis.pid_turn_set(50_deg, 70);
+  chassis.pid_turn_set(46_deg, 70);
   chassis.pid_wait();
-  chassis.pid_odom_set({{15_in, 25_in}, fwd, 40}, true);
+  chassis.pid_odom_set({{17_in, 28_in}, fwd, 30}, true);
   chassis.pid_wait();
   pros::delay(1000);
-  chassis.pid_odom_set({{8.5_in, 33_in, -50_deg}, fwd, 70}, true);
+  chassis.pid_odom_set({{8.5_in, 33_in, -43_deg}, fwd, 70}, true);
   chassis.pid_wait();
   low_goal();
   pros::delay(2000);
-  chassis.pid_odom_set({{42.5_in, 10_in, 180_deg}, rev, 110}, true);
-  chassis.pid_wait(); // Ensure the drive command completes before ending the function
+  chassis.pid_odom_set({{40.5_in, 10_in}, rev, 110}, true);
+  chassis.pid_wait(); 
+  chassis.pid_turn_set(180_deg, 50);
+  chassis.pid_wait();// Ensure the drive command completes before ending the function
   scraper.set(true); // Deploy scraper
   basket();
-  pros::delay(2000);
-  chassis.pid_odom_set({{42.5_in, 15_in, 180_deg}, fwd, 50}, true);
+  pros::delay(500);
+  chassis.pid_odom_set({{40.5_in, -11.5_in, 180_deg}, fwd, 120}, true);
   chassis.pid_wait();
+  basket();
+  pros::delay(3000); 
+  chassis.pid_wait();
+  chassis.pid_odom_set({{40.5_in, 0_in, 180_deg}, rev, 110}, true);
+  chassis.pid_wait();
+  scraper.set(false); // Retract scraper
+  chassis.pid_turn_set(0_deg, 100);
+  chassis.pid_wait(); // Ensure the drive command completes before ending the function
+  // chassis.pid_odom_set({{42.5_in, 15_in, 180_deg}, fwd, 50}, true);
+  // chassis.pid_wait();
 }
 
-void middle_goal() {
-}
+void middle_goal_auto() {
+  basket();
+  chassis.pid_odom_set({{0_in, 4_in}, fwd, 110}, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(-46_deg, 70);
+  chassis.pid_wait();
+  chassis.pid_odom_set({{-17_in, -28_in}, fwd, 30}, true);
+  chassis.pid_wait();
+  pros::delay(1000);
+  chassis.pid_odom_set({{-8.5_in, -33_in, 45_deg}, fwd, 70}, true);
+  chassis.pid_wait();
+  middle_goal();
+  pros::delay(2000);
+  chassis.pid_odom_set({{-41_in, -10_in}, rev, 110}, true);
+  chassis.pid_wait(); 
+  chassis.pid_turn_set(180_deg, 50);
+  chassis.pid_wait();// Ensure the drive command completes before ending the function
+  scraper.set(true); // Deploy scraper
+  basket();
+  pros::delay(500);
+  chassis.pid_odom_set({{-41_in, 7_in, 180_deg}, fwd, 110}, true);
+  chassis.pid_wait();
+ }
 ///
 // Drive Example
 ///

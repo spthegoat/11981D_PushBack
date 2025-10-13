@@ -1,9 +1,9 @@
 #pragma once
 
-void middle_goal();
-void low_goal();
-void default_constants();
+void middle_goal_auto();
+void low_goal_auto();
 
+void default_constants();
 void drive_example();
 void turn_example();
 void drive_and_turn();
