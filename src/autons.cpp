@@ -49,7 +49,7 @@ void default_constants() {
 }
 
 
-void middle_goal_right() {
+void low_goal() {
   // Drive to middle goal 
   basket();
   chassis.pid_odom_set({{0_in, 4_in}, fwd, 110}, true);
@@ -70,6 +70,9 @@ void middle_goal_right() {
   pros::delay(2000);
   chassis.pid_odom_set({{42.5_in, 15_in, 180_deg}, fwd, 50}, true);
   chassis.pid_wait();
+}
+
+void middle_goal() {
 }
 ///
 // Drive Example

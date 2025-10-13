@@ -1,6 +1,7 @@
 #pragma once
 
-void middle_goal_right();
+void middle_goal();
+void low_goal();
 void default_constants();
 
 void drive_example();

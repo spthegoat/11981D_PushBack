@@ -58,7 +58,8 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
-      {"Score in Middle Goal from Right", middle_goal_right},
+      {"Score in Middle Goal from Mid Line", middle_goal},
+      {"Score in Low Goal from Mid Line", low_goal},
       //{"Drive\n\nDrive forward and come back", drive_example},
       //{"Turn\n\nTurn 3 times.", turn_example},
       //{"Drive and Turn\n\nDrive forward, turn, come back", drive_and_turn},
