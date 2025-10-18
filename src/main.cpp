@@ -269,9 +269,9 @@ void opcontrol() {
   if (master.get_digital(DIGITAL_L1)) {
     // middle goal
     piston1.set(false); 
-    front_intake.move(100);
-    back_intake.move(100);
-    top_intake.move(-100);
+    front_intake.move(115);
+    back_intake.move(115);
+    top_intake.move(-115);
   } else if (master.get_digital(DIGITAL_L2)) {
     // outtake
     piston1.set(false);

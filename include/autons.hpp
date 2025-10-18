@@ -2,7 +2,6 @@
 
 void middle_goal_auto();
 void low_goal_auto();
-
 void default_constants();
 void drive_example();
 void turn_example();
