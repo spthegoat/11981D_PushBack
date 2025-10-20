@@ -6,7 +6,7 @@
 /////
 
 // These are out of 127
-const int DRIVE_SPEED = 110;
+const int DRIVE_SPEED = 120;
 const int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
 
@@ -42,7 +42,7 @@ void default_constants() {
   chassis.odom_turn_bias_set(0.9);
 
   chassis.odom_look_ahead_set(7_in);           // This is how far ahead in the path the robot looks at
-  chassis.odom_boomerang_distance_set(16_in);  // This sets the maximum distance away from target that the carrot point can be
+  chassis.odom_boomerang_distance_set(25_in);  // This sets the maximum distance away from target that the carrot point can be
   chassis.odom_boomerang_dlead_set(0.625);     // This handles how aggressive the end of boomerang motions are
 
   chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there
@@ -121,7 +121,7 @@ chassis.pid_odom_set({{-42.5_in, -14_in, 180_deg}, fwd, 127}, true);
   scraper.set(false); // Retract scraper
   chassis.pid_turn_set(0_deg, 100);
   chassis.pid_wait();
- }
+}
 ///
 // Drive Example
 ///
