@@ -1,11 +1,8 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-<<<<<<< HEAD
     "project_name": "Rigt Ato",
-=======
     "project_name": "Right",
->>>>>>> b7abd2f52795064255fe2d845413f8da6eac52dd
     "target": "v5",
     "templates": {
       "EZ-Template": {
@@ -428,16 +425,9 @@
       }
     },
     "upload_options": {
-<<<<<<< HEAD
-      "description": "roboticsisez.com",
-      "icon": "pizza",
-      "after": "screen",
-      "slot": 1
-=======
       "description": "RIght",
       "slot": 1,
       "icon": "pizza"
->>>>>>> b7abd2f52795064255fe2d845413f8da6eac52dd
     },
     "use_early_access": false
   }
